@@ -1,0 +1,2 @@
+brew install rename
+find . -name "*.png" -exec rename 's/\.png$/.jpg/' '{}' +

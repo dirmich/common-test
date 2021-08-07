@@ -69,12 +69,12 @@ class TokenManager {
   }
 }
 
-// const tm = new TokenManager({expiresIn:'1s'},'hello')
-// let token = tm.sign({a:1,b:2})
-// console.log('token',token)
-// let r = tm.verify(token)
-// console.log('result',r)
-// let d = tm.decode(token)
-// console.log('decoded',d)
+const tm = new TokenManager({ expiresIn: '1s' }, 'hello')
+let token = tm.sign({ a: 1, b: 2 })
+console.log('token', token)
+let r = tm.verify(token)
+console.log('result', r)
+let d = tm.decode(token)
+console.log('decoded', d)
 
 module.exports = { TokenManager }
