@@ -32,7 +32,7 @@ const defaultOpt = {
 }
 
 class TokenManager {
-  constructor(opt, skey, pkey) {
+  constructor({ skey, pkey, ...opt }) {
     this.skey = skey
     this.pkey = pkey ? pkey : skey
     this.opt = {
@@ -46,8 +46,17 @@ class TokenManager {
     }
   }
 
-  sign(obj) {
-    return jwt.sign(obj, this.skey, { ...this.opt, ...this.verifier })
+  sign(obj, opt = {}) {
+    try {
+      return jwt.sign(obj, this.skey, {
+        ...this.opt,
+        ...this.verifier,
+        ...this.opt,
+      })
+    } catch (e) {
+      console.error(e)
+      return null
+    }
     // return jwt.sign((typeof obj === 'string')?obj:JSON.stringify(obj),this.skey,this.opt)
   }
 
@@ -69,12 +78,13 @@ class TokenManager {
   }
 }
 
-const tm = new TokenManager({ expiresIn: '1s' }, 'hello')
-let token = tm.sign({ a: 1, b: 2 })
-console.log('token', token)
-let r = tm.verify(token)
-console.log('result', r)
-let d = tm.decode(token)
-console.log('decoded', d)
-
+const test = () => {
+  const tm = new TokenManager({ expiresIn: '1s' }, 'hello')
+  let token = tm.sign({ a: 1, b: 2 })
+  console.log('token', token)
+  let r = tm.verify(token)
+  console.log('result', r)
+  let d = tm.decode(token)
+  console.log('decoded', d)
+}
 module.exports = { TokenManager }

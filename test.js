@@ -48,7 +48,7 @@ function pad(str, padlen = 2, fillchar = '0') {
 
 // console.log(pad(123, 5))
 
-const m = moment()
-console.log(m.day())
-console.log(m.weekday())
-console.log(m.isoWeekday())
+// const m = moment()
+// console.log(m.day())
+// console.log(m.weekday())
+// console.log(m.isoWeekday())
