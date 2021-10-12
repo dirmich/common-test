@@ -1,0 +1,21 @@
+<head>
+
+<body>
+    <script>
+        var source = new EventSource('/connect');
+        source.onmessage = function (e) {
+            console.log('-->', e)
+            if (!!e.done) {
+                alert('OK')
+            } else {
+                var jsonData = JSON.parse(e.data);
+                alert("My message: " + jsonData.msg);
+            }
+        }
+        source.onerror = e => {
+            console.error(e)
+            source.close()
+        }
+    </script>
+</body>
+</head>

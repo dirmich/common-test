@@ -339,7 +339,11 @@ const total = async (from_server) => {
   console.log(b)
 }
 
-total()
+total({
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWVkIjoiMDljYmQ0YmJhY2FlY2YxNmVhYThmOGMyNjVlNTUwOTdjN2FmOWVmYmM3MGQ4NDgxNzBmMjY3YzNjM2MyNDA5MiIsImV4cCI6MTY2MTU4MzU0NiwiaXNzIjoiYXV0aC5oaWdobWFydS5jb20ifQ.k5JigwVJcwOE5eHSowbn7D0D3cR4uuEOcPxIZAVQgM4',
+  data: '0450ddf7568722120d868a39164210371d373e41a65769d0fd8447edab7903f800305561435e99249fc6b507036e990d905c3cb565fd1adf4248238aedf95b7cd7',
+})
 // const k = crypto.createSecretKey(Buffer.from('1234'))
 // const kp = crypto.createPrivateKey('1234')
 // const ks = crypto.createPublicKey('1234')

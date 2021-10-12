@@ -5,6 +5,25 @@ class Redis {
   constructor(host = 'localhost', port = 6379) {
     this.client = redis.createClient(port, host)
   }
+  pub(channel, data) {
+    this.client.publish(channel, data, (count) => {
+      console.log('pub to ', count)
+    })
+  }
+
+  sub(channel, start = true) {
+    if (start) {
+      this.client.subscribe(channel)
+      this.client.on('subscribe', (chann, count) => {
+        console.log('start sub ', chann, count)
+      })
+      this.client.on('message', (chann, data) => {
+        console.log('recv data ', chann, data)
+      })
+    } else {
+      this.client.unsubscribe(channel)
+    }
+  }
 
   set(key, val) {
     return new Promise((resolve, reject) => {
@@ -59,6 +78,20 @@ class Redis {
     })
   }
 
+  removeAll() {
+    return new Promise((resolve, reject) => {
+      this.client.keys('*', (err, keys) => {
+        if (err) reject(err)
+        resolve(
+          Promise.all(
+            keys.map(async (k) => {
+              return { [k]: await this.remove(k) }
+            })
+          )
+        )
+      })
+    })
+  }
   match(field, value) {
     return new Promise((resolve, reject) => {})
   }
@@ -94,6 +127,16 @@ function test(key, val) {
 function test2() {
   const r = new Redis()
   r.loadAll(true).then((keys) => console.log(keys))
+  // r.removeAll().then((keys) => console.log(keys))
 }
 
-test2()
+function test3() {
+  const a = new Redis()
+  const b = new Redis()
+
+  a.sub('hello')
+  // setTimeout(() => b.pub('hello', 'from [B], world'), 5000)
+  setInterval(() => b.pub('hello', 'from [B], world'), 1000)
+}
+
+test3()
