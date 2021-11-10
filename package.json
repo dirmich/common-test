@@ -24,6 +24,7 @@
     "@transmute/ed25519-signature-2018": "^0.6.1-unstable.36",
     "@transmute/jsonld-document-loader": "^0.2.0",
     "@transmute/vc.js": "^0.2.1-unstable.12",
+    "aedes": "^0.46.1",
     "axios": "^0.21.1",
     "bitcoinjs-lib": "^5.2.0",
     "body-parser": "^1.19.0",
@@ -42,6 +43,7 @@
     "lodash": "^4.17.20",
     "midi-file": "^1.1.2",
     "moment": "^2.29.1",
+    "mqtt": "^4.2.8",
     "node-rsa": "^1.1.1",
     "node-vault": "^0.9.22",
     "nodemailer": "^6.4.11",
@@ -50,7 +52,10 @@
     "secp256k1": "^4.0.2",
     "sendmail": "^1.6.1",
     "slip39": "^0.1.7",
-    "uuid": "^8.3.2"
+    "socket.io-client": "^4.3.2",
+    "uuid": "^8.3.2",
+    "ws": "^8.2.3",
+    "ws-client-js": "^1.0.5"
   },
   "devDependencies": {
     "ipfs-http-client": "^53.0.1",
