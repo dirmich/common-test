@@ -1,4 +1,6 @@
 const io = require('ws')
+const INTERVAL = 5000
+const CLIENT_ID = 'rpi-3'
 
 class WSClient {
   constructor(url) {
@@ -25,8 +27,9 @@ class WSClient {
     s.on('message', (recv, isBinary) => {
       let data = Buffer.from(recv).toString('utf-8')
       try {
-        data = data.toJSON()
+        data = JSON.parse(data) //data.toJSON()
       } catch {}
+      console.log('R]', data)
       if (this.onMessage) this.onMessage(data, isBinary)
     })
     s.on('ping', () => {
@@ -46,12 +49,22 @@ class WSClient {
   }
 }
 
-const test = async () => {
+const test = async (client_id) => {
   const ws = new WSClient('ws://localhost:3001/farm')
+  // const ws = new WSClient('wss://farmapi.kakaolab.ml/farm')
+  // const ws = new WSClient('ws://15.165.138.208:3000/farm')
+
+  // const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
   try {
     ws.onOpen = (s) => {
       console.log('connected ', s)
-      ws.send({ cmd: 'register', data: { id: CLIENT_ID } })
+      ws.send({
+        cmd: 'register',
+        data: {
+          id: client_id,
+          url: 'https://amore-video.s3.ap-northeast-2.amazonaws.com/opening.mp4',
+        },
+      })
       const data = []
       data.push(Math.floor(Math.random() * 1000) / 10)
       data.push(Math.floor(Math.random() * 1000) / 10)
@@ -59,10 +72,11 @@ const test = async () => {
       data.push(Math.floor(Math.random() * 1000) / 10)
       data.push(Math.floor(Math.random() * 1000) / 10)
       setInterval(() => {
+        // console.log('send ', client_id)
         ws.send({
           cmd: 'signal',
           data: {
-            id: CLIENT_ID, //data: data.join('|') } })
+            id: client_id, //data: data.join('|') } })
             data: data.map((i) => i.toFixed(1)).join('|'),
           },
         }),
@@ -91,6 +105,5 @@ const test = async () => {
   }
 }
 
-const INTERVAL = 5000
-const CLIENT_ID = 'rpi-2'
-test()
+// for (let i = 1; i <= 2; i++) test(`rpi-${i}`)
+test('rpi-3')
