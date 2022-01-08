@@ -1,11 +1,11 @@
-const { connect, StringCodec } = require('nats')
+const { connect, StringCodec, JSONCodec } = require('nats')
+const sc = StringCodec()
 
 const test = async () => {
   // to create a connection to a nats-server:
   const nc = await connect({ servers: 'highmaru.com:4222' })
   console.log('connected')
   // create a codec
-  const sc = StringCodec()
   // create a simple subscriber and iterate over messages
   // matching the subscription
   //   setInterval(() => {
@@ -32,4 +32,27 @@ const test = async () => {
   await nc.drain()
 }
 
-test()
+const test2 = async (nc) => {
+  nc.request(
+    'calc.sub',
+    sc.encode(JSON.stringify({ a: 1, b: 2 }), { timeout: 3000 })
+  )
+    .then((m) => {
+      console.log('R]', m.reply, sc.decode(m.data))
+    })
+    .catch((e) => {
+      console.error('ERR]', e.toString())
+    })
+}
+
+;(async () => {
+  const nc = await connect({
+    servers: 'highmaru.com:4222',
+    noEcho: true,
+    timeout: 1000,
+  })
+  console.log('connected')
+  await test2(nc)
+  //   nc.publish('hello') //, JSONCodec().encode({ hello: 'world' }))
+})()
+// test()
