@@ -50,11 +50,11 @@ class WSClient {
 }
 
 const test = async (client_id) => {
-  const ws = new WSClient('ws://localhost:3001/farm')
+  // const ws = new WSClient('ws://localhost:3001/farm')
   // const ws = new WSClient('wss://farmapi.kakaolab.ml/farm')
   // const ws = new WSClient('ws://15.165.138.208:3000/farm')
 
-  // const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
+  const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
   try {
     ws.onOpen = (s) => {
       console.log('connected ', s)

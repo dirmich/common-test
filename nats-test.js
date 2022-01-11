@@ -34,7 +34,7 @@ const test = async () => {
 
 const test2 = async (nc) => {
   nc.request(
-    'calc.sub',
+    'calc.add',
     sc.encode(JSON.stringify({ a: 1, b: 2 }), { timeout: 3000 })
   )
     .then((m) => {
@@ -52,7 +52,11 @@ const test2 = async (nc) => {
     timeout: 1000,
   })
   console.log('connected')
+  const sub = nc.subscribe('>')
   await test2(nc)
+  for await (const m of sub) {
+    console.log(`[${sub.getProcessed()}]: ${sc.decode(m.data)}`)
+  }
   //   nc.publish('hello') //, JSONCodec().encode({ hello: 'world' }))
 })()
 // test()
