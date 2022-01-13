@@ -51,9 +51,6 @@ class WSClient {
 
 const test = async (client_id) => {
   // const ws = new WSClient('ws://localhost:3001/farm')
-  // const ws = new WSClient('wss://farmapi.kakaolab.ml/farm')
-  // const ws = new WSClient('ws://15.165.138.208:3000/farm')
-
   const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
   try {
     ws.onOpen = (s) => {
@@ -71,10 +68,22 @@ const test = async (client_id) => {
       data.push(Math.floor(Math.random() * 1000) / 10)
       data.push(Math.floor(Math.random() * 1000) / 10)
       data.push(Math.floor(Math.random() * 1000) / 10)
+
+      let count = 1
+      setInterval(() => {
+        ws.send({
+          cmd: 'alarm',
+          data: {
+            type: 'warning',
+            message: `Test #${count}`,
+          },
+        })
+        count++
+      }, 30000)
       setInterval(() => {
         // console.log('send ', client_id)
         ws.send({
-          cmd: 'signal',
+          cmd: 'sensor',
           data: {
             id: client_id, //data: data.join('|') } })
             data: data.map((i) => i.toFixed(1)).join('|'),
@@ -105,5 +114,45 @@ const test = async (client_id) => {
   }
 }
 
+const alarm = (client_id) => {
+  // const ws = new WSClient('ws://localhost:3001/farm')
+  const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
+  try {
+    ws.onOpen = (s) => {
+      console.log('connected ', s)
+      ws.send({
+        cmd: 'register',
+        data: {
+          id: client_id,
+          url: 'https://amore-video.s3.ap-northeast-2.amazonaws.com/opening.mp4',
+        },
+      })
+      let count = parseInt(Math.random() * 100)
+      setTimeout(() => {
+        ws.send({
+          cmd: 'alarm',
+          data: {
+            id: client_id,
+            data: {
+              type: 'warning',
+              message: `Test #${count}`,
+            },
+          },
+        })
+        count++
+      }, 5)
+    }
+    ws.onMessage = (s, b) => {
+      console.log('message ', JSON.stringify(s), b)
+    }
+    ws.onClose = (c, r) => {
+      console.log('disconnected ', c, r)
+    }
+    ws.connect()
+  } catch (e) {
+    console.error(e)
+  }
+}
 // for (let i = 1; i <= 2; i++) test(`rpi-${i}`)
-test('rpi-3')
+test('rpi-10')
+// alarm('rpi-10')
