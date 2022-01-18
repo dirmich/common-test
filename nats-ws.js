@@ -60,12 +60,13 @@ class Nats {
   send(cmd, data) {
     let payload = cmd
     if (data) {
-      const tmp = typeof data === 'object' ? JSON.stringify(data) : data
+      const tmp =
+        typeof data === 'object' ? JSON.stringify(data) : data.toString()
       payload += ` ${tmp.length}\r\n${tmp}\r\n`
     } else {
       payload += '\r\n'
     }
-    // console.log('send:', payload)
+    console.log('send:', payload)
     this.sock.send(this.conv(payload))
   }
   sendInfo() {
@@ -242,4 +243,29 @@ const test = async () => {
 }
 
 // for (let i = 1; i <= 2; i++) test(`rpi-${i}`)
-test()
+// test()
+const test2 = async () => {
+  const ws = new Nats('wss://highmaru.com:4223')
+  try {
+    ws.onOpen = async (s) => {
+      console.log('connected ')
+      await ws.sendInfo()
+      // setTimeout(() => {
+      ws.subscribe('blink')
+      // }, 0)
+      setInterval(() => {
+        ws.publish('blink', 3)
+      }, 5000)
+    }
+    ws.onMessage = (subject, data) => {
+      console.log('MSG]', subject, data)
+    }
+    ws.onClose = (c, r) => {
+      console.log('disconnected ', c.toString())
+    }
+    ws.connect()
+  } catch (e) {
+    console.error(e)
+  }
+}
+test2()
