@@ -74,8 +74,11 @@ const test = async (client_id) => {
         ws.send({
           cmd: 'alarm',
           data: {
-            type: 'warning',
-            message: `Test #${count}`,
+            id: client_id,
+            data: {
+              type: 'warning',
+              message: `Test #${count}`,
+            },
           },
         })
         count++
@@ -115,8 +118,8 @@ const test = async (client_id) => {
 }
 
 const alarm = (client_id) => {
-  // const ws = new WSClient('ws://localhost:3001/farm')
-  const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
+  const ws = new WSClient('ws://localhost:3001/farm')
+  // const ws = new WSClient('wss://smartfarms.cafe24.com:3000/farm')
   try {
     ws.onOpen = (s) => {
       console.log('connected ', s)
@@ -154,5 +157,6 @@ const alarm = (client_id) => {
   }
 }
 // for (let i = 1; i <= 2; i++) test(`rpi-${i}`)
-test('rpi-10')
-// alarm('rpi-10')
+// test('rpi11')
+test('rp_101')
+// test('rpi-10')

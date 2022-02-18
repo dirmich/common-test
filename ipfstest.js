@@ -1,6 +1,6 @@
 const IPFS = require('ipfs-http-client')
-// const ipfs = IPFS.create('http://192.168.0.10:7000')
-const ipfs = IPFS.create('https://ipfs.infura.io:5001')
+const ipfs = IPFS.create('https://ipfs.kakaolab.ml')
+// const ipfs = IPFS.create('https://ipfs.infura.io:5001')
 const addFile = async () => {
   const file = await ipfs.add({
     path: '/testfile',

@@ -25,11 +25,11 @@ class Nats {
     }
     Nats.instance = this
     const defaultOpt = {
-      verbose: false,
+      verbose: true,
       echo: false,
-      lang: 'go',
+      lang: 'go1',
       version: '1.0',
-      tls_required: true,
+      // tls_required: true,
       pedantic: false,
       protocol: 1,
     }
@@ -245,7 +245,8 @@ const test = async () => {
 // for (let i = 1; i <= 2; i++) test(`rpi-${i}`)
 // test()
 const test2 = async () => {
-  const ws = new Nats('wss://highmaru.com:4223')
+  // const ws = new Nats('ws://highmaru.com:4223')
+  const ws = new Nats('wss://nats.highmaru.com')
   try {
     ws.onOpen = async (s) => {
       console.log('connected ')

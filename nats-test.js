@@ -47,7 +47,8 @@ const test2 = async (nc) => {
 
 ;(async () => {
   const nc = await connect({
-    servers: 'highmaru.com:4222',
+    servers: 'wss://nats.highmaru.com',
+    // servers: 'highmaru.com:4223',
     noEcho: true,
     timeout: 1000,
   })
