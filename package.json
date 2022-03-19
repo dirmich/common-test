@@ -10,6 +10,7 @@
     "dt": "nodemon - exec ts-node "
   },
   "dependencies": {
+    "@abcnews/base-36-text": "^1.0.0",
     "@aries-framework/core": "^0.1.0-alpha.0",
     "@aries-framework/node": "^0.1.0-alpha.0",
     "@babel/core": "^7.12.13",
@@ -27,6 +28,8 @@
     "@trustwallet/wallet-core": "^2.6.12",
     "aedes": "^0.46.1",
     "axios": "^0.21.1",
+    "base-x": "^4.0.0",
+    "big-integer": "^1.6.51",
     "bitcoinjs-lib": "^5.2.0",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.9",
@@ -37,6 +40,7 @@
     "ethr-did": "^2.1.4",
     "excel-to-mongodb": "^1.5.8",
     "express": "^4.17.1",
+    "hex2dec": "^1.1.2",
     "indy-sdk": "^1.16.0-dev-1634",
     "jsonwebtoken": "^8.5.1",
     "jssha": "^3.2.0",
