@@ -50,6 +50,7 @@
     "moment": "^2.29.1",
     "mqtt": "^4.2.8",
     "nats": "^2.4.0",
+    "node-fetch": "2",
     "node-rsa": "^1.1.1",
     "node-vault": "^0.9.22",
     "nodemailer": "^6.4.11",
