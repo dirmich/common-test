@@ -55,7 +55,8 @@ const abi = [
   },
 ]
 const provider = new ethers.providers.JsonRpcProvider(
-  'https://data-seed-prebsc-1-s1.binance.org:8545'
+  //   'https://data-seed-prebsc-1-s1.binance.org:8545'
+  'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
 )
 const contract = new ethers.Contract(contract_addr, abi, provider)
 
@@ -65,8 +66,9 @@ console.log(utils.formatUnits(cc), cc)
 console.log('Listen')
 
 const sender_skey =
-  '0x10419ae694a0720aea1cf6287459f787b32c7ffdac2dad9ec1911620b0bfb0b6'
+  '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
 const sender_wallet = new ethers.Wallet(sender_skey, provider)
+const sender_addr = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
 const receiver_addr = '0x9b4eF34934fE70dC84e502a78C47fd4564d7D6F0'
 const tx = { to: receiver_addr }
 
@@ -78,9 +80,15 @@ contract.on('Transfer', (a, b, c, e) => {
   console.log(`BlockHash: ${e.blockHash}`)
   console.log(`transaction Hash: ${e.transactionHash}`)
 
-  tx.value = utils.parseEther('0.001')
+  if (b === sender_addr) {
+    console.log(`Receive: ${eth}`)
+    const toSend = String(parseFloat(eth) * 0.9)
+    tx.value = utils.parseEther(toSend)
 
-  sender_wallet.sendTransaction(tx).then((r) => console.log('send ', r.hash))
+    sender_wallet
+      .sendTransaction(tx)
+      .then((r) => console.log(`send ${toSend}ETH :  ${r.hash}`))
+  }
   //   contract.removeAllListeners('Transfer')
   //   exit(0)
 })
