@@ -1,9 +1,11 @@
 const { ethers, utils } = require('ethers')
 const { networks, apikey } = require('./eth-env')
-const base = networks.rinkeby
 
-const provider = new ethers.providers.JsonRpcProvider(base.rpc)
+// const base = networks.rinkeby
+const base = networks.mainnet
+// const provider = new ethers.providers.JsonRpcProvider(base.rpc)
 // const provider = new ethers.providers.getDefaultProvider('rinkeby')
+const provider = new ethers.providers.getDefaultProvider('homestead')
 // const provider = new ethers.providers.getDefaultProvider('homestead', {
 //   infura: {
 //     projectId: '9aa3d95b3bc440fa88ea12eaa4456161',
@@ -22,14 +24,41 @@ const fw_addrs = [
   '0x5c4F8653Fa07bAD8FEb562112cd5E1726388f85f',
 ]
 
+const gasUrl = 'https://blocknative-api.herokuapp.com'
+const axios = require('axios').create({
+  baseURL: gasUrl,
+})
+
+const getGasfee = async () => {
+  if (base === networks.mainnet) {
+    const {
+      data: {
+        baseFeePerGas,
+        estimatedPrices: [feedata, ...other],
+      },
+    } = await axios.get('/data')
+    info(`gasfee = ${baseFeePerGas} + ${feedata.maxPriorityFeePerGas}`)
+    return parseFloat(feedata.maxPriorityFeePerGas) + parseFloat(baseFeePerGas) // feedata.maxFeePerGas
+  } else {
+    const feedata = await provider.getFeeData()
+    const gasfee = utils.formatUnits(feedata.maxFeePerGas, 'gwei')
+    info(
+      `gasfee = ${gasfee} ${utils.formatUnits(
+        feedata.gasPrice,
+        'gwei'
+      )} ${utils.formatUnits(feedata.maxPriorityFeePerGas, 'gwei')}`
+    )
+    return parseFloat(gasfee)
+  }
+}
+
 const bot = async () => {
   const recv_wallet = new ethers.Wallet(recv_skey, provider)
 
   provider.on('block', async (bno) => {
     info(`Listening new block, waiting.. ${recv_wallet.address} : ${bno}`)
     const balance = await provider.getBalance(recv_wallet.address)
-    const feedata = await provider.getFeeData()
-    const gasfee = utils.formatUnits(feedata.maxFeePerGas, 'gwei')
+    const gasfee = await getGasfee()
     const txBuffer = ethers.utils.parseUnits(
       String(parseFloat(gasfee * 21000).toFixed(9)),
       'gwei'
