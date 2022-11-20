@@ -64,10 +64,14 @@ function wsUrlParseFn(u2) {
   console.log('S]parse4', u2, url)
 }
 
-console.log(wsUrlParseFn('highmaru.com:4222'))
-// console.log(pad(123, 5))
+// console.log(wsUrlParseFn('highmaru.com:4222'))
+// // console.log(pad(123, 5))
 
-// const m = moment()
-// console.log(m.day())
-// console.log(m.weekday())
-// console.log(m.isoWeekday())
+// // const m = moment()
+// // console.log(m.day())
+// // console.log(m.weekday())
+// // console.log(m.isoWeekday())
+
+const t = new Date().getTime()
+const t2 = moment(new Date(t)).format('LT')
+console.log(t, t2)

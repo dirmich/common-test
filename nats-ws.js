@@ -252,10 +252,14 @@ const test2 = async () => {
       console.log('connected ')
       await ws.sendInfo()
       // setTimeout(() => {
-      ws.subscribe('blink')
+      // ws.subscribe('room.list.*', (subject, data) => {
+      //   console.log('MSG]', subject, data)
+      // })
       // }, 0)
+      ws.subscribe('room.>')
+
       setInterval(() => {
-        ws.publish('blink', 3)
+        ws.publish('room.list', 3)
       }, 5000)
     }
     ws.onMessage = (subject, data) => {

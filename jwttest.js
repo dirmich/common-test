@@ -87,4 +87,5 @@ const test = () => {
   let d = tm.decode(token)
   console.log('decoded', d)
 }
+test()
 module.exports = { TokenManager }
