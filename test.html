@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Webpage Title</title>
+    <script>
+        function showAlert() {
+            // Get the value from the input field
+            var input = document.querySelector("input[type='text']").value;
+            // Display the value in an alert dialog box
+            alert(input);
+        }
+    </script>
+</head>
+
+<body>
+    <!-- This is the input field for the user to enter text -->
+    <div>
+        <input type="text" placeholder="Enter text here">
+    </div>
+    <!-- This is the button for the user to submit the input -->
+    <div>
+        <button type="submit" onclick="showAlert()">Submit</button>
+    </div>
+</body>
+
+</html>

@@ -4,6 +4,7 @@ const sc = StringCodec()
 const test = async () => {
   // to create a connection to a nats-server:
   const nc = await connect({ servers: 'highmaru.com:4222' })
+  // const nc = await connect({ servers: '13.209.47.49:4222' })
   console.log('connected')
   // create a codec
   // create a simple subscriber and iterate over messages
@@ -45,16 +46,33 @@ const test2 = async (nc) => {
     })
 }
 
+const test_hm = async (nc) => {
+  nc.request('server.login.1113')
+    .then((m) => {
+      console.log('RESP]', m)
+      deviceinfo = m
+      return m
+    })
+    .catch((e) => {
+      console.error('E]', e)
+    })
+}
+
 ;(async () => {
+  console.log('start')
   const nc = await connect({
-    servers: 'wss://nats.highmaru.com',
-    // servers: 'highmaru.com:4223',
+    servers: [
+      // 'wss://nats.highmaru.com:4222',
+      'ws://54.180.142.236:4223',
+    ],
+    // servers: 'ws://highmaru.com:4222',
     noEcho: true,
     timeout: 1000,
   })
   console.log('connected')
   const sub = nc.subscribe('>')
-  await test2(nc)
+  // await test2(nc)
+  await test_hm(nc)
   for await (const m of sub) {
     console.log(`[${sub.getProcessed()}]: ${sc.decode(m.data)}`)
   }

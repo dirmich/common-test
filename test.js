@@ -72,6 +72,10 @@ function wsUrlParseFn(u2) {
 // // console.log(m.weekday())
 // // console.log(m.isoWeekday())
 
+function getCount(str) {
+  return (str.match(/[aeiou]/gi) || []).length
+}
+
 const t = new Date().getTime()
 const t2 = moment(new Date(t)).format('LT')
-console.log(t, t2)
+console.log(t, t2, getCount('compare with your solution'))
