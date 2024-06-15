@@ -37,7 +37,7 @@ async function test() {
         'command.py',
         'slice',
         '-l',
-        '6',
+        '5',
         '-c',
         '1',
         '-d',
