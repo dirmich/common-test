@@ -1,0 +1,2 @@
+[.env commit 했을때]
+ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HEAD
