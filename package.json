@@ -9,6 +9,7 @@
     "ts": "ts-node ",
     "dt": "nodemon - exec ts-node "
   },
+  "type": "module",
   "dependencies": {
     "@abcnews/base-36-text": "^1.0.0",
     "@aries-framework/core": "^0.1.0-alpha.0",
@@ -21,6 +22,7 @@
     "@did-core/did-dag-cbor": "^0.1.1-unstable.13",
     "@did-core/did-json": "^0.1.1-unstable.13",
     "@did-core/did-ld-json": "^0.1.1-unstable.13",
+    "@octokit/rest": "^21.0.0",
     "@transmute/did-key-ed25519": "^0.2.1-unstable.42",
     "@transmute/did-key-x25519": "^0.2.1-unstable.42",
     "@transmute/ed25519-signature-2018": "^0.6.1-unstable.36",
@@ -37,6 +39,7 @@
     "cheerio": "^1.0.0-rc.9",
     "cors": "^2.8.5",
     "did-jwt-vc": "^2.1.3",
+    "dotenv": "^16.4.5",
     "ec-key": "^0.0.4",
     "eth-sig-util": "^3.0.1",
     "ethers": "^5.6.5",
@@ -50,6 +53,7 @@
     "jssha": "^3.2.0",
     "jwt-jwks-client": "^0.2.1",
     "keccak256": "^1.0.2",
+    "libsodium-wrappers": "^0.7.13",
     "lodash": "^4.17.20",
     "midi-file": "^1.1.2",
     "moment": "^2.29.1",
