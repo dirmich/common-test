@@ -5,11 +5,12 @@ import sodium from 'libsodium-wrappers'
 // require('dotenv').config()
 // const sodium = require('libsodium-wrappers')
 
-const PROJECT = 'maruai-server'
+const PROJECT = 'dangol-front'
 const secrets = {
   DOCKERHUB_USERNAME: 'dirmich',
-  DOCKERHUB_TOKEN: 'dmswjddl',
+  DOCKERHUB_TOKEN: 'dustjdi00',
   AWS_SSH_HOST: 'highmaru.com',
+  AWS_SSH_USER: 'dirmich',
   AWS_SSH_PASS: 'dmswjddl',
   AWS_SSH_PORT: '12369',
 }
