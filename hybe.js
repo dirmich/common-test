@@ -73,4 +73,46 @@ const test = () => {
   console.log(group)
 }
 
-test()
+// test()
+const split3 = (num) => {
+  return (
+    num
+      .split(/([\d\w]{2})/)
+      .filter((e) => e)
+      // .map((e) => console.log(e))
+      .join(':')
+  )
+}
+
+// console.log(split3('aabbccddff'))
+
+const list1 = [
+  { start: 0, end: 123 },
+  { start: 337, end: 412 },
+  { start: 505, end: 528 },
+]
+
+const check = (list, count) => {
+  let startnum = 0
+  if (list.length > 0) {
+    let min = 0
+    for (let i = 0; i < list.length; i++) {
+      let c = list[i]
+      if (min < c.start) {
+        if (min + count < c.start) {
+          break
+        } else {
+          min = c.end + 1
+        }
+      } else {
+        min = c.end + 1
+      }
+    }
+    startnum = min
+  } else {
+    startnum = 7
+  }
+  console.log(`start:${startnum}, end:${startnum + count - 1}`)
+}
+
+check([], 30)

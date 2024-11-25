@@ -1,4 +1,4 @@
-const moment = require('moment')
+// const moment = require('moment')
 
 const url = 'https://dev.nimble-kona.com/movies/movie_1_1.mp4'
 
@@ -72,10 +72,71 @@ function wsUrlParseFn(u2) {
 // // console.log(m.weekday())
 // // console.log(m.isoWeekday())
 
-function getCount(str) {
-  return (str.match(/[aeiou]/gi) || []).length
+// function getCount(str) {
+//   return (str.match(/[aeiou]/gi) || []).length
+// }
+
+// const t = new Date().getTime()
+// const t2 = moment(new Date(t)).format('LT')
+// console.log(t, t2, getCount('compare with your solution'))
+
+const arrtest = () => {
+  const arr = [
+    { idx: 0, v: '0' },
+    { idx: 1, v: '1' },
+    { idx: 2, v: '2' },
+  ]
+  // const r = [...arr.filter((a) => a.idx !== 1)]
+  // r.push({ idx: 1, v: '3' })
+  const idx = 1
+  const r = { ...arr, [idx.toString()]: { idx: 1, v: '3' } }
+  console.log(r)
 }
 
-const t = new Date().getTime()
-const t2 = moment(new Date(t)).format('LT')
-console.log(t, t2, getCount('compare with your solution'))
+const pointer = () => {
+  const arr = [
+    { idx: 0, v: '0' },
+    {
+      idx: 1,
+      v: '1',
+      arr: [
+        { idx: 0, v: '0' },
+        { idx: 1, v: '1' },
+        { idx: 2, v: '2' },
+      ],
+    },
+    { idx: 2, v: '2' },
+  ]
+  let p = arr[1]
+  p = p['arr']
+  p = p[0]
+  p.v = '9'
+  console.log(p, JSON.stringify(arr))
+}
+
+// pointer()
+const arrtest2 = () => {
+  const arr = [
+    { idx: 0, v: '0' },
+    { idx: 1, v: '1' },
+    { idx: 2, v: '2' },
+  ]
+  const { [2]: ready, ...rest } = arr
+  console.log(ready, Object.values(rest))
+}
+
+// arrtest2()
+
+const getRandomString = (len, isHex = false) => {
+  return isHex
+    ? [...Array(len)]
+        .map(() => Math.floor(Math.random() * 16).toString(16))
+        .join('')
+    : new Array(len).join().replace(/(.|$)/g, function () {
+        return ((Math.random() * 36) | 0)
+          .toString(36)
+          [Math.random() < 0.5 ? 'toString' : 'toUpperCase']()
+      })
+}
+console.log(getRandomString(17))
+console.log(getRandomString(50, true))
