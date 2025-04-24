@@ -138,5 +138,63 @@ const getRandomString = (len, isHex = false) => {
           [Math.random() < 0.5 ? 'toString' : 'toUpperCase']()
       })
 }
-console.log(getRandomString(17))
-console.log(getRandomString(50, true))
+// console.log(getRandomString(17))
+// console.log(getRandomString(50, true))
+
+let data = `import mongoose from 'mongoose'
+import apaginate from 'mongoose-aggregate-paginate-v2'
+import paginate from 'mongoose-paginate-v2'
+
+const Schema = new mongoose.Schema(
+  {
+    	name:String,
+	nick:String,
+	phone:String,
+	email:String,
+	passwd:String,
+	type:String,
+	active:Boolean,
+	picture:String,
+	pushkey:String,
+  
+  },
+  {
+    timestamps: true,
+    toJSON: {
+      // for external response
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret.__v
+      },
+    },
+    toObject: {
+      virtuals: true,
+      // for internal response
+      transform: function (doc, ret) {
+        delete ret.__v
+      },
+    },
+  }
+)
+
+Schema.statics.byOwner = async function (uid) {
+  const list = await this.find({ owner: uid }).sort({ createdAt: -1 })
+  return list //as
+}
+
+
+Schema.plugin(apaginate)
+Schema.plugin(paginate)
+export default mongoose.model('user', Schema)
+`
+// data = data.replace(/^[\s]*\/\/[^]*/g, '=>')
+// const ex = /(^Schema[^.]*)/g
+// data = data.split('\n').join('\r\n')
+const ex = /[^\s]*\s*\/\/[^\r\n]*/g
+const data2 = data.replace(ex, '')
+// const data2 = data.match(ex)
+// const data2 = ''
+
+// console.log(data, data2)
+const t = ['https://fronturl', 'http://localhost:3002']
+console.log(t.indexOf('http://localhost:3002'))

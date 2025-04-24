@@ -5,9 +5,13 @@ import { createInterface } from 'node:readline/promises'
 import { Ollama } from 'ollama'
 import path from 'path'
 import pdf from 'pdf-parse-fork'
-const ollama = new Ollama({ host: 'http://192.168.0.107:8000' })
+// const ollama = new Ollama({ host: 'http://192.168.0.107:8000' })
+const ollama = new Ollama({
+  host: 'https://banana-taro-kowv1nlfipd0tqsw.salad.cloud/',
+})
 // const MODEL='ggml'
-const MODEL = 'solar-pro'
+// const MODEL = 'solar-pro'
+const MODEL = 'llama2'
 
 const env = { client: null, collection: null }
 
@@ -178,8 +182,9 @@ const getData = async (query) => {
 const test4 = async () => {
   while (true) {
     const str = await input('-->')
-    const data = await getData(str)
-    const prompt = `Using this data:${data}. respond to this prompt:${str}. respond in korean.`
+    // const data = await getData(str)
+    // const prompt = `Using this data:${data}. respond to this prompt:${str}. respond in korean.`
+    const prompt = `respond to this prompt:${str}. respond in korean.`
     await quest(prompt)
   }
 }
