@@ -50,7 +50,7 @@ const test_hm = async (nc) => {
   nc.request('server.login.1113')
     .then((m) => {
       console.log('RESP]', m)
-      deviceinfo = m
+      // deviceinfo = m
       return m
     })
     .catch((e) => {
@@ -63,7 +63,9 @@ const test_hm = async (nc) => {
   const nc = await connect({
     servers: [
       // 'wss://nats.highmaru.com:4222',
-      'ws://54.180.142.236:4223',
+      'wss://nats.highmaru.com',
+      // 'ws://nats.highmaru.com:4223',
+      // 'ws://54.180.142.236:4223',
     ],
     // servers: 'ws://highmaru.com:4222',
     noEcho: true,
