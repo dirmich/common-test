@@ -1,11 +1,11 @@
-const { connect, StringCodec, JSONCodec } = require('nats')
+const { connect, StringCodec, JSONCodec } = require("nats")
 const sc = StringCodec()
 
 const test = async () => {
   // to create a connection to a nats-server:
-  const nc = await connect({ servers: 'highmaru.com:4222' })
+  const nc = await connect({ servers: "highmaru.com:4222" })
   // const nc = await connect({ servers: '13.209.47.49:4222' })
-  console.log('connected')
+  console.log("connected")
   // create a codec
   // create a simple subscriber and iterate over messages
   // matching the subscription
@@ -14,7 +14,7 @@ const test = async () => {
   //     nc.publish('hello', sc.encode('again'))
   //   }, 2000)
 
-  const sub = nc.subscribe('hello')
+  const sub = nc.subscribe("hello")
   for await (const m of sub) {
     console.log(`[${sub.getProcessed()}]: ${sc.decode(m.data)}`)
     // setTimeout(() => {
@@ -22,7 +22,7 @@ const test = async () => {
     // }, 5000)
   }
 
-  console.log('subscription closed')
+  console.log("subscription closed")
 
   // we want to insure that messages that are in flight
   // get processed, so we are going to drain the
@@ -35,44 +35,45 @@ const test = async () => {
 
 const test2 = async (nc) => {
   nc.request(
-    'calc.add',
+    "calc.add",
     sc.encode(JSON.stringify({ a: 1, b: 2 }), { timeout: 3000 })
   )
     .then((m) => {
-      console.log('R]', m.reply, sc.decode(m.data))
+      console.log("R]", m.reply, sc.decode(m.data))
     })
     .catch((e) => {
-      console.error('ERR]', e.toString())
+      console.error("ERR]", e.toString())
     })
 }
 
 const test_hm = async (nc) => {
-  nc.request('server.login.1113')
+  nc.request("server.login.1113")
     .then((m) => {
-      console.log('RESP]', m)
+      console.log("RESP]", m)
       // deviceinfo = m
       return m
     })
     .catch((e) => {
-      console.error('E]', e)
+      console.error("E]", e)
     })
 }
 
 ;(async () => {
-  console.log('start')
+  console.log("start")
   const nc = await connect({
     servers: [
       // 'wss://nats.highmaru.com:4222',
-      'wss://nats.highmaru.com',
+      // 'wss://nats.highmaru.com',
+      "wss://nats2.highmaru.com:4222"
       // 'ws://nats.highmaru.com:4223',
       // 'ws://54.180.142.236:4223',
     ],
     // servers: 'ws://highmaru.com:4222',
     noEcho: true,
-    timeout: 1000,
+    timeout: 1000
   })
-  console.log('connected')
-  const sub = nc.subscribe('>')
+  console.log("connected")
+  const sub = nc.subscribe(">")
   // await test2(nc)
   await test_hm(nc)
   for await (const m of sub) {
