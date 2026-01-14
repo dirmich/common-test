@@ -6,11 +6,13 @@ import sodium from "libsodium-wrappers"
 // const sodium = require('libsodium-wrappers')
 
 // const PROJECT = 'dangol-front'
+// const PROJECT = 'dangol-server'
 // const PROJECT = "strava_clone"
 // const PROJECT = "silverlatte-v1"
 // const PROJECT = "walkfit"
-const PROJECT = "maruprompt"
+// const PROJECT = "maruprompt"
 // const PROJECT = "marutalk"
+const PROJECT = "marumodel"
 // const secrets = {
 //   DOCKERHUB_USERNAME: "dirmich",
 //   DOCKERHUB_TOKEN: "dustjdi00",
@@ -178,22 +180,36 @@ const octokit = new Octokit({
     const val = variables[item]
     try {
       octokit.request(
-        `POST /repos/${process.env.GITHUB_USER}/${PROJECT}/actions/variables`,
-        {
-          owner: process.env.GITHUB_USER,
-          repo: PROJECT,
-          name: item,
-          value: val,
-          headers: {
-            "X-GitHub-Api-Version": "2022-11-28"
-          }
+      `PUT /repos/${process.env.GITHUB_USER}/${PROJECT}/actions/variables/${item}`,
+      {
+        owner: process.env.GITHUB_USER,
+        repo: PROJECT,
+        name: item,
+        value: encval,
+        key_id,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28"
         }
-      )
+      }
+    )
+      // octokit.request(
+      //   `PATCH /repos/${process.env.GITHUB_USER}/${PROJECT}/actions/variables/${item}`,
+      //   {
+      //     owner: process.env.GITHUB_USER,
+      //     repo: PROJECT,
+      //     name: item,
+      //     value: val,
+      //     headers: {
+      //       "X-GitHub-Api-Version": "2022-11-28"
+      //     }
+      //   }
+      // )
+      
       
     } catch (e) {
       console.log("Variable not found, creating new one:", item)
       octokit.request(
-        `PATCH /repos/${process.env.GITHUB_USER}/${PROJECT}/actions/variables/${item}`,
+        `POST /repos/${process.env.GITHUB_USER}/${PROJECT}/actions/variables`,
         {
           owner: process.env.GITHUB_USER,
           repo: PROJECT,
