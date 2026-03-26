@@ -12,7 +12,10 @@ import sodium from "libsodium-wrappers"
 // const PROJECT = "walkfit"
 // const PROJECT = "maruprompt"
 // const PROJECT = "marutalk"
-const PROJECT = "marumodel"
+// const PROJECT = "marumodel"
+// const PROJECT = "marubook"
+// const PROJECT = "myclaw"
+const PROJECT = "testsuite-3.8"
 // const secrets = {
 //   DOCKERHUB_USERNAME: "dirmich",
 //   DOCKERHUB_TOKEN: "dustjdi00",
@@ -21,36 +24,39 @@ const PROJECT = "marumodel"
 //   AWS_SSH_PASS: "dmswjddl",
 //   AWS_SSH_PORT: "12369"
 // }
+// const variables = {
+//   DOCKER_REPOSITORY: 'dirmich/myclaw'
+// }
 
-const secrets = {
-  DOCKERHUB_USERNAME: "dirmich",
-  DOCKERHUB_TOKEN: "dustjdi00",
-  AWS_SSH_HOST: "lab.highmaru.com",
-  AWS_SSH_USER: "dirmich",
-  AWS_SSH_PASS: "dmswjddl",
-  AWS_SSH_PORT: "22"
-}
-const variables = {
-  DOCKER_REPOSITORY: `dirmich/${PROJECT}b`,
-  DOCKER_FRONT_REPOSITORY: `dirmich/${PROJECT}`
-}
+// const secrets = {
+//   DOCKERHUB_USERNAME: "dirmich",
+//   DOCKERHUB_TOKEN: "dustjdi00",
+//   AWS_SSH_HOST: "lab.highmaru.com",
+//   AWS_SSH_USER: "dirmich",
+//   AWS_SSH_PASS: "dmswjddl",
+//   AWS_SSH_PORT: "22"
+// }
+// const variables = {
+//   DOCKER_REPOSITORY: `dirmich/${PROJECT}b`,
+//   DOCKER_FRONT_REPOSITORY: `dirmich/${PROJECT}`
+// }
 // acs
 // const PROJECT = 'project-acs-frontend-v3.5'
 // // const PROJECT = 'project-acs-backend-v3.5'
-// const secrets = {
-//   AWS_SSH_HOST: 'ics.lab.highmaru.com',
-//   AWS_SSH_USER: 'ec2-user',
-//   AWS_SSH_PORT: 22,
-//   AWS_SSH_KEY:
-//     '-----BEGIN OPENSSH PRIVATE KEY-----\r\n' +
-//     'b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\r\n' +
-//     'c2gtZWQyNTUxOQAAACCD/Y5s2ksqlNJsQTdBi6trtPaEdswM4Z+pEAIPwxkh7QAA\r\n' +
-//     'AIiGs8zchrPM3AAAAAtzc2gtZWQyNTUxOQAAACCD/Y5s2ksqlNJsQTdBi6trtPaE\r\n' +
-//     'dswM4Z+pEAIPwxkh7QAAAEAwUQIBATAFBgMrZXAEIgQg2p0foVwVSxg4lAgL4Hap\r\n' +
-//     '6oP9jmzaSyqU0mxBN0GLq2u09oR2zAzhn6kQAg/DGSHtAAAAAAECAwQF\r\n' +
-//     '-----END OPENSSH PRIVATE KEY-----',
-// }
-// const variables = {}
+const secrets = {
+  AWS_SSH_HOST: 'ics.lab.highmaru.com',
+  AWS_SSH_USER: 'ec2-user',
+  AWS_SSH_PORT: 22,
+  AWS_SSH_KEY:
+    '-----BEGIN OPENSSH PRIVATE KEY-----\r\n' +
+    'b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtz\r\n' +
+    'c2gtZWQyNTUxOQAAACCD/Y5s2ksqlNJsQTdBi6trtPaEdswM4Z+pEAIPwxkh7QAA\r\n' +
+    'AIiGs8zchrPM3AAAAAtzc2gtZWQyNTUxOQAAACCD/Y5s2ksqlNJsQTdBi6trtPaE\r\n' +
+    'dswM4Z+pEAIPwxkh7QAAAEAwUQIBATAFBgMrZXAEIgQg2p0foVwVSxg4lAgL4Hap\r\n' +
+    '6oP9jmzaSyqU0mxBN0GLq2u09oR2zAzhn6kQAg/DGSHtAAAAAAECAwQF\r\n' +
+    '-----END OPENSSH PRIVATE KEY-----',
+}
+const variables = {}
 // ////////
 // // ucs
 // const PROJECT = 'project-ws-backend-v3.5'
