@@ -15,7 +15,7 @@ import sodium from "libsodium-wrappers"
 // const PROJECT = "marumodel"
 // const PROJECT = "marubook"
 // const PROJECT = "myclaw"
-const PROJECT = "testsuite-3.8"
+// const PROJECT = "testsuite-3.8"
 // const secrets = {
 //   DOCKERHUB_USERNAME: "dirmich",
 //   DOCKERHUB_TOKEN: "dustjdi00",
@@ -41,7 +41,7 @@ const PROJECT = "testsuite-3.8"
 //   DOCKER_FRONT_REPOSITORY: `dirmich/${PROJECT}`
 // }
 // acs
-// const PROJECT = 'project-acs-frontend-v3.5'
+const PROJECT = 'project-acs-frontend-v3.8'
 // // const PROJECT = 'project-acs-backend-v3.5'
 const secrets = {
   AWS_SSH_HOST: 'ics.lab.highmaru.com',
@@ -55,6 +55,8 @@ const secrets = {
     'dswM4Z+pEAIPwxkh7QAAAEAwUQIBATAFBgMrZXAEIgQg2p0foVwVSxg4lAgL4Hap\r\n' +
     '6oP9jmzaSyqU0mxBN0GLq2u09oR2zAzhn6kQAg/DGSHtAAAAAAECAwQF\r\n' +
     '-----END OPENSSH PRIVATE KEY-----',
+  DOCKERHUB_USERNAME:'dirmich',
+  DOCKERHUB_TOKEN:'dustjdi00'
 }
 const variables = {}
 // ////////
