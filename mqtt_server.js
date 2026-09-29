@@ -1,6 +1,8 @@
 const mqtt = require('mqtt')
 const $USERNAME = 'user'
-const $PASSWORD = 'pass'
+require('dotenv').config()
+// --filename-- .env (MQTT_TEST_PASSWORD)
+const $PASSWORD = process.env.MQTT_TEST_PASSWORD || ''
 const mqttClient = mqtt.connect('mqtt://localhost', {
   username: $USERNAME,
   password: $PASSWORD,

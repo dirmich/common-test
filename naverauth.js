@@ -1,4 +1,6 @@
+require("dotenv").config();
 const crypto = require("crypto");
+// --filename-- .env (NAVER_SENS_SERVICE_ID, NAVER_SENS_ACCESS_KEY, NAVER_SENS_SECRET_KEY, NAVER_SENS_SENDER, NAVER_SENS_DEFAULT_PHONE)
 const { promisify } = require("util");
 const request = require("request");
 const getRequest = promisify(request.get).bind(request);
@@ -6,10 +8,10 @@ const postRequest = promisify(request.post).bind(request);
 
 const naver = {
   // service_id: 'ncp:sms:kr:259564686851:shuttleb',
-  // secret: '8ebb37d94b1a420c9015242ac45459a7',
-  service_id: "ncp:sms:kr:259564686851:shuttleb",
-  access: "LSw8PW9yefRv3AHP0Crk", // API
-  secret: "BxOvQeO4x6TNl2MLJENIt3WtKIp8yyeUNO1Zi8LG", // API
+
+  service_id: process.env.NAVER_SENS_SERVICE_ID,
+  access: process.env.NAVER_SENS_ACCESS_KEY,
+  secret: process.env.NAVER_SENS_SECRET_KEY
 };
 
 // const sms_base = 'https://sens.apigw.ntruss.com/sms/v2'
@@ -54,7 +56,7 @@ function sms(phone, msg) {
     },
     body: JSON.stringify({
       type: "SMS",
-      from: "0269540127",
+      from: process.env.NAVER_SENS_SENDER,
       content: msg,
       messages: [
         {
@@ -67,4 +69,4 @@ function sms(phone, msg) {
   });
 }
 
-sms("01032886542");
+if (process.env.NAVER_SENS_DEFAULT_PHONE) sms(process.env.NAVER_SENS_DEFAULT_PHONE, "test message");

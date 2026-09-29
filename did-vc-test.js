@@ -1,3 +1,4 @@
+// --filename-- .env (DID_VC_PRIVATE_KEY)
 const { EthrDID } = require('ethr-did')
 const {
   JwtCredentialPayload,
@@ -18,7 +19,7 @@ async function test() {
   const issuer = new EthrDID({
     identifier: '0xb9c5714089478a327f09197987f16f9e5d936e8a',
     privateKey:
-      'd8b595680851765f38ea5405129244ba3cbad84467d190859f4c8b20c1ff6c75',
+      process.env.DID_VC_PRIVATE_KEY,
     chainNameOrId: 'rinkeby',
   })
   console.log(issuer)

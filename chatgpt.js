@@ -1,7 +1,13 @@
+import 'dotenv/config'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 const fetch = require('node-fetch')
 
 // OpenAI API Key
-const apiKey = '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'
+// --filename-- .env (OPENAI_API_KEY)
+const apiKey = process.env.OPENAI_API_KEY
+if (!apiKey) throw new Error('Set OPENAI_API_KEY in .env.')
 
 // API 요청 함수
 async function requestChatGPT(prompt) {

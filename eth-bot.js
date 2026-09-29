@@ -1,3 +1,5 @@
+require('dotenv').config()
+// --filename-- .env (ETH_TEST_PRIVATE_KEY)
 const { ethers, utils } = require('ethers')
 const { networks, apikey } = require('./eth-env')
 
@@ -6,17 +8,10 @@ const base = networks.mainnet
 // const provider = new ethers.providers.JsonRpcProvider(base.rpc)
 // const provider = new ethers.providers.getDefaultProvider('rinkeby')
 const provider = new ethers.providers.getDefaultProvider('homestead')
-// const provider = new ethers.providers.getDefaultProvider('homestead', {
-//   infura: {
-//     projectId: '9aa3d95b3bc440fa88ea12eaa4456161',
-//     // projectSecret: '0b5b364c59c24f23be846a7b0fc0a37e',
-//   },
-// })
 const error = console.log
 const info = console.log
 // console.log('Listen', base.name,provider.getNetwork())
-const recv_skey =
-  '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
+const recv_skey = process.env.ETH_TEST_PRIVATE_KEY
 const recv_addr = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'
 const fw_addrs = [
   '0x9b4eF34934fE70dC84e502a78C47fd4564d7D6F0',

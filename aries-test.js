@@ -1,3 +1,5 @@
+require('dotenv').config()
+// --filename-- .env (ARIES_TEST_WALLET_KEY)
 const { Agent } = require('@aries-framework/core')
 const { agentDependencies } = require('@aries-framework/node')
 const makeId = (id) => {
@@ -9,7 +11,7 @@ const test = async () => {
     {
       label: 'test',
       walletConfig: { id: 'testwallet' },
-      walletCredentials: { key: '0000000000000000000000000000test' },
+      walletCredentials: { key: process.env.ARIES_TEST_WALLET_KEY },
       publicDidSeed: makeId('test11'),
       endpoint: 'https://192.168.0.2:3111',
     },

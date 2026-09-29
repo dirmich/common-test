@@ -1,13 +1,14 @@
 {
   "name": "0.test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "module & function test for all project",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "babel": "babel-node",
     "ts": "ts-node ",
-    "dt": "nodemon - exec ts-node "
+    "dt": "nodemon - exec ts-node ",
+    "githubaction": "bun githubaction.js"
   },
   "type": "module",
   "dependencies": {
@@ -85,5 +86,8 @@
     "prettier": "^2.4.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
+  },
+  "bin": {
+    "githubaction": "githubaction.js"
   }
 }

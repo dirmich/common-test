@@ -1,3 +1,7 @@
 node_modules
 logs
 .env
+.env.*
+!.env.example
+*.pem
+key/key.json

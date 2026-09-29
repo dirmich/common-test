@@ -1,3 +1,5 @@
+require('dotenv').config()
+// --filename-- .env (MAIL_TEST_USER, MAIL_TEST_PASSWORD)
 const mail = require('nodemailer')
 
 const opt = {
@@ -9,8 +11,8 @@ const opt = {
   // port: 587,
   // // secure: false,
   auth: {
-    user: 'admin@shuttleb.com',
-    pass: 'admin1210^^',
+    user: process.env.MAIL_TEST_USER,
+    pass: process.env.MAIL_TEST_PASSWORD,
   },
 }
 let transporter = mail.createTransport(opt)
@@ -27,7 +29,7 @@ transporter.verify(function (error, success) {
 function send() {
   transporter
     .sendMail({
-      from: 'admin@shuttleb.com',
+      from: process.env.MAIL_TEST_USER,
       to: 'dhshin@highmaru.com',
       subject: 'Test',
       html: '<button>누르세요</button>',

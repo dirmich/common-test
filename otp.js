@@ -110,12 +110,12 @@ class OTP {
 // // console.log(randomString(12))
 // console.log(
 //   OTP.parse(
-//     'otpauth://totp/BitMEX:dirmich@gmail.com?secret=E2MJ3E2F754JMYMK&issuer=BitMEX'
+
 //   ).totp()
 // )
 // console.log(
 //   OTP.parse(
-//     'otpauth://totp/Bitsonic(dirmich@gmail.com)?secret=YQHNWTZPSBE36SMD'
+
 //   ).totp()
 // )
 
